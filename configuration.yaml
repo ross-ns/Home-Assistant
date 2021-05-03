@@ -1,0 +1,14 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+automation: !include_dir_merge_list automations
+climate: !include climate.yaml
+frontend:
+  themes: !include themes.yaml
+http: !include http.yaml
+input_select: !include input_select.yaml
+sensor: !include sensor.yaml
+scene: !include scenes.yaml
+script: !include scripts.yaml
+
+duckdns: !include duckdns.yaml

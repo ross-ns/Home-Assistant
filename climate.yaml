@@ -1,0 +1,13 @@
+  - platform: generic_thermostat
+    name: Boiler
+    heater: switch.boiler
+    target_sensor: sensor.monitored_room_temperature
+    away_temp: 16
+
+  - platform: generic_thermostat
+    name: Bedroom fan
+    ac_mode: true
+    initial_hvac_mode: cool
+    heater: switch.bedroom_fan
+    target_sensor: sensor.bedroom_temperature
+    

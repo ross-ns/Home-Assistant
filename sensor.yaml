@@ -1,0 +1,16 @@
+- platform: time_date
+
+- platform: template
+  sensors:
+  # A sensor for the thermostat to use in its target_sensor property
+    monitored_room_temperature:
+      friendly_name: "Monitored room temperature"
+      value_template: "{{ states('sensor.' ~ states('input_select.monitored_room').lower() ~ '_temperature') }}"
+
+    # Takes the average temperature of the living room, bedroom and study
+    average_temperature:
+      friendly_name: 'Average temperature'
+      unit_of_measurement: '°C'
+      device_class: 'temperature'
+      value_template: "{{ ((states('sensor.living_room_temperature') | float + states('sensor.bedroom_temperature') | float + states('sensor.study_temperature') | float) / 3) | round(1) }}"
+  

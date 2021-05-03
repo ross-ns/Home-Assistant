@@ -1,0 +1,184 @@
+# The following scripts are called by their corresponding automations
+morning:
+  alias: Morning
+  sequence:
+  # Set monitored room
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.monitored_room
+    data:
+      option: Bedroom
+  # Set fan thermostat off
+  - service: climate.turn_off
+    entity_id: climate.bedroom_fan
+  # Set other rooms GUI buttons off
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.living_room_monitored
+      - input_boolean.study_monitored
+  # Set bedroom GUI button on
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.bedroom_monitored
+  # Set thermostat target temperature
+  - condition: state
+    entity_id: person.ross_sutherland
+    state: home
+  - service: climate.set_temperature
+    target:
+      entity_id: climate.boiler
+    data:
+      temperature: 17.5
+  
+day:
+  alias: Day
+  sequence:
+  # Set monitored room
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.monitored_room
+    data:
+      option: Study
+  # Set other rooms GUI buttons off
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.living_room_monitored
+      - input_boolean.bedroom_monitored
+  # Set bedroom GUI button on
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.study_monitored
+  # Set thermostat target temperature
+  - condition: state
+    entity_id: person.ross_sutherland
+    state: home
+  - service: climate.set_temperature
+    target:
+      entity_id: climate.boiler
+    data:
+      temperature: 19
+
+evening:
+  alias: Evening
+  sequence:
+  # Set monitored room
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.monitored_room
+    data:
+      option: Living_room
+  # Set other rooms GUI buttons off
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.study_monitored
+      - input_boolean.bedroom_monitored
+  # Set bedroom GUI button on
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.living_room_monitored
+  # Set thermostat target temperature
+  - condition: state
+    entity_id: person.ross_sutherland
+    state: home
+  - service: climate.set_temperature
+    target:
+      entity_id: climate.boiler
+    data:
+      temperature: 20
+
+night:
+  alias: night
+  sequence:
+  # Set monitored room
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.monitored_room
+    data:
+      option: Bedroom
+  # Set fan thermostat on
+  - service: climate.turn_on
+    entity_id: climate.bedroom_fan
+  # Set other rooms GUI buttons off
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.study_monitored
+      - input_boolean.living_room_monitored
+  # Set bedroom GUI button on
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.bedroom_monitored
+  # Set target temperature
+  - condition: state
+    entity_id: person.ross_sutherland
+    state: home
+  - service: climate.set_temperature
+    target:
+      entity_id: climate.boiler
+    data:
+      temperature: 13
+
+
+# The following scripts are used for the GUI buttons when pressed
+living_room_button_pressed:
+  alias: Living room button pressed
+  sequence:
+  # Set monitored room
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.monitored_room
+    data:
+      option: Living_room
+  # Set other rooms GUI buttons off
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.bedroom_monitored
+      - input_boolean.study_monitored
+  # Set bedroom GUI button on
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.living_room_monitored
+
+study_button_pressed:
+  alias: Study button pressed
+  sequence:
+  # Set monitored room
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.monitored_room
+    data:
+      option: Study
+  # Set other rooms GUI buttons off
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.bedroom_monitored
+      - input_boolean.living_room_monitored
+  # Set bedroom GUI button on
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.study_monitored
+
+bedroom_button_pressed:
+  alias: Bedroom button pressed
+  sequence:
+  # Set monitored room
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.monitored_room
+    data:
+      option: Bedroom
+  # Set other rooms GUI buttons off
+  - service: input_boolean.turn_off
+    target:
+      entity_id:
+      - input_boolean.study_monitored
+      - input_boolean.living_room_monitored
+  # Set bedroom GUI button on
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.bedroom_monitored

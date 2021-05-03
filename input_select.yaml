@@ -1,0 +1,6 @@
+  monitored_room:
+    name: Monitored room
+    options:
+      - Living_room
+      - Study
+      - Bedroom

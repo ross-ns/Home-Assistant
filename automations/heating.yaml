@@ -1,0 +1,31 @@
+- alias: Heating - Morning
+  trigger:
+  - platform: time
+    at: "08:00"
+  action:
+  - service: script.turn_on
+    entity_id: script.morning
+
+- alias: Heating - Day
+  trigger:
+  - platform: time
+    at: "09:00"
+  action:
+  - service: script.turn_on
+    entity_id: script.day
+
+- alias: Heating - Evening
+  trigger:
+  - platform: time
+    at: "16:30"
+  action:
+  - service: script.turn_on
+    entity_id: script.evening
+
+- alias: Heating - Night
+  trigger:
+  - platform: time
+    at: "23:00"
+  action:
+  - service: script.turn_on
+    entity_id: script.night    
