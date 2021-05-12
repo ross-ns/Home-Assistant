@@ -1,5 +1,14 @@
 - platform: time_date
 
+- platform: deluge
+  host: 192.168.0.1
+  username: !secret deluge_username
+  password: !secret deluge_password
+  monitored_variables:
+    - 'current_status'
+    - 'download_speed'
+    - 'upload_speed'
+
 - platform: template
   sensors:
   # A sensor for the thermostat to use in its target_sensor property
